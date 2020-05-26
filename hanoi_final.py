@@ -1,9 +1,13 @@
+#步驟計數器
+steps=1
 #產生演算法並顯示過程
 def hanoi(n, a, b, c,poles):
+    global steps
     if n == 1:
-        print("步驟： 盤由柱 %c 移至柱 %c" % (a,c))
+        print("第%d步： 盤由柱 %c 移至柱 %c" % (steps,a,c))
+        steps+=1
         poles[int(c)-1].insert(0,poles[int(a)-1].pop(0))
-        print('結果： ', poles)
+        print('結 果： ', poles)
         print()
         
     else:
