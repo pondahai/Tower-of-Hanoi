@@ -1,9 +1,15 @@
-#產生演算法
-def hanoi(n, a, b, c):
+#產生演算法並顯示過程
+def hanoi(n, a, b, c,poles):
     if n == 1:
-        return [(a, c)]
+        print("步驟： 盤由柱 %c 移至柱 %c" % (a,c))
+        poles[int(c)-1].insert(0,poles[int(a)-1].pop(0))
+        print('結果： ', poles)
+        print()
+        
     else:
-        return hanoi(n-1, a, c, b) + hanoi(1, a, b, c) + hanoi(n-1, b, a, c)
+        hanoi(n-1, a, c, b,poles)
+        hanoi(1, a, b, c,poles)
+        hanoi(n-1, b, a, c,poles)
 
 #使用者輸入盤子數目
 n = input("請輸入整數：")
@@ -11,12 +17,7 @@ n = input("請輸入整數：")
 poles=[list(range(1,int(n)+1)),[],[]]
 #印出柱子初始狀態
 print(poles)
+print()
 #運算並列舉出演算法結果
-for move in hanoi(int(n), '1', '2', '3'):
-    #逐步顯示演算法結果
-    print("盤由柱 %c 移至柱 %c" % move)
-    #根據結果對柱子產生動作
-    poles[int(move[1])-1].insert(0,poles[int(move[0])-1].pop(0))
-    #將柱子狀態印出
-    print(poles)
-    
+hanoi(int(n), '1', '2', '3',poles)
+print('完成')
